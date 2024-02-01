@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="com.ashera.nestedscrollview.ios"
+        version="1.0">
+
+  <name>CordovaNestedScrollViewPlugin</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+  
+  <platform name="ios">
+    <config-file target="config.xml" parent="/widget">
+      <feature name="com.ashera.nestedscrollview.ios">
+        	<param name="ios-package" value="CordovaNestedScrollViewPlugin" />
+         	<param name="onload" value="true" />
+      </feature>
+    </config-file>
+
+   	 <!-- start ios -->
+     <header-file src="ios/src/CordovaNestedScrollViewPlugin.h" target-dir="NestedScrollView/ios/src"/>
+     <source-file src="ios/src/CordovaNestedScrollViewPlugin.m" target-dir="NestedScrollView/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/NestedScrollViewImpl.h" target-dir="NestedScrollView/ios/src"/>
+     <source-file src="ios/src/NestedScrollViewImpl.m" target-dir="NestedScrollView/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/NestedScrollViewPlugin.h" target-dir="NestedScrollView/ios/src"/>
+     <source-file src="ios/src/NestedScrollViewPlugin.m" target-dir="NestedScrollView/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <!-- ios end -->
+     <!-- start tsc -->
+     <source-file src="tsc/src/ios/widget/NestedScrollViewImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <!-- tsc end -->
+  </platform>
+
+</plugin>

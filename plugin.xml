@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="com.ashera.nestedscrollview"
+        version="1.0">
+
+  <name>CordovaNestedScrollViewPlugin</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+  
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="CordovaNestedScrollViewPlugin">
+        <param name="android-package" value="com.ashera.nestedscrollview.CordovaNestedScrollViewPlugin"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+
+   	 <!-- start src -->
+     <source-file src="android/src/com/ashera/nestedscrollview/CordovaNestedScrollViewPlugin.java" target-dir="src/com/ashera/nestedscrollview"/>
+     <source-file src="android/src/com/ashera/nestedscrollview/NestedScrollViewImpl.java" target-dir="src/com/ashera/nestedscrollview"/>
+     <source-file src="android/src/com/ashera/nestedscrollview/NestedScrollViewPlugin.java" target-dir="src/com/ashera/nestedscrollview"/>
+     <!-- src end -->
+     <!-- start res -->
+
+     <!-- res end -->
+     <!-- start tsc -->
+     <source-file src="android/tsc/src/android/widget/NestedScrollViewImpl.ts" target-dir="tsc/src/android/widget"/>
+     <!-- tsc end -->
+  </platform>
+  <platform name="ios">
+    <config-file target="config.xml" parent="/widget">
+      <feature name="com.ashera.nestedscrollview.ios">
+        	<param name="ios-package" value="CordovaNestedScrollViewPlugin" />
+         	<param name="onload" value="true" />
+      </feature>
+    </config-file>
+
+   	 <!-- start ios -->
+     <header-file src="ios/ios/src/CordovaNestedScrollViewPlugin.h" target-dir="NestedScrollView/ios/src"/>
+     <source-file src="ios/ios/src/CordovaNestedScrollViewPlugin.m" target-dir="NestedScrollView/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/ios/src/NestedScrollViewImpl.h" target-dir="NestedScrollView/ios/src"/>
+     <source-file src="ios/ios/src/NestedScrollViewImpl.m" target-dir="NestedScrollView/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/ios/src/NestedScrollViewPlugin.h" target-dir="NestedScrollView/ios/src"/>
+     <source-file src="ios/ios/src/NestedScrollViewPlugin.m" target-dir="NestedScrollView/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <!-- ios end -->
+     <!-- start tsc -->
+     <source-file src="ios/tsc/src/ios/widget/NestedScrollViewImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <!-- tsc end -->
+  </platform>
+  <platform name="browser">
+    <config-file target="config.xml" parent="/*">
+      <feature name="CordovaNestedScrollViewPlugin">
+        <param name="android-package" value="com.ashera.nestedscrollview.CordovaNestedScrollViewPlugin"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+	<framework src="browser/core.gradle" custom="true" type="gradleReference" />
+   	 <!-- start src -->
+     <!-- src end -->
+     <!-- start res -->
+     <!-- res end -->
+     <!-- start tsc -->
+     <source-file src="browser/tsc/src/web/widget/NestedScrollViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <!-- tsc end -->
+  </platform>
+  <platform name="swt">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="CordovaNestedScrollViewPlugin">
+        <param name="android-package" value="com.ashera.nestedscrollview.CordovaNestedScrollViewPlugin"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+	<framework src="swt/core.gradle" custom="true" type="gradleReference" />
+   	 <!-- start src -->
+     <!-- src end -->
+     <!-- start res -->
+     <!-- res end -->
+     <!-- start tsc -->
+     <source-file src="swt/tsc/src/swt/widget/NestedScrollViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <!-- tsc end -->
+  </platform>
+
+
+
+
+
+</plugin>
