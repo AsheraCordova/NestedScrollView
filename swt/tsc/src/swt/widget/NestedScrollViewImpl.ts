@@ -13,6 +13,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -29,26 +30,26 @@ export abstract class NestedScrollViewImpl<T> extends ViewGroupImpl<T>{
 	//start - body
 	static initialize() {
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "foregroundGravity" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "foregroundGravity" }))
 	foregroundGravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "measureAllChildren" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "measureAllChildren" }))
 	measureAllChildren!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "nestedScrollingEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "nestedScrollingEnabled" }))
 	nestedScrollingEnabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onScrollChange" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onScrollChange" }))
 	onScrollChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "fillViewport" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "fillViewport" }))
 	fillViewport!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "smoothScrollingEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "smoothScrollingEnabled" }))
 	smoothScrollingEnabled!:CommandAttr<boolean>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
@@ -174,10 +175,10 @@ this.foregroundGravity.setTransformer('gravity');		return this.thisPointer;
 	
 //start - staticinit
 export abstract class NestedScrollViewImpl_LayoutParams<T> extends ViewGroupImpl_LayoutParams<T> {
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_gravity" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_gravity" }))
 	layout_gravity!:CommandAttr<Gravity[]>| undefined;
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
