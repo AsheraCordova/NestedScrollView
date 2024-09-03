@@ -216,6 +216,7 @@ return layoutParams.gravity;			}
 	public class NestedScrollViewExt extends androidx.core.widget.NestedScrollView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return NestedScrollViewImpl.this;
 		}
@@ -268,9 +269,12 @@ return layoutParams.gravity;			}
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(NestedScrollViewImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b, (int) (computeVerticalScrollRange()));
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(NestedScrollViewImpl.this);
+	        overlays = ViewImpl.drawOverlay(NestedScrollViewImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -399,7 +403,7 @@ return layoutParams.gravity;			}
 				setState4(value);
 				return;
 			}
-			NestedScrollViewImpl.this.setAttribute(name, value, true);
+			NestedScrollViewImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {
