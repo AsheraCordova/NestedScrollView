@@ -108,7 +108,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {		
+	public boolean remove(IWidget w) {
 		boolean remove = super.remove(w);
 		nestedScrollView.removeView((View) w.asWidget());
 		return remove;
@@ -355,7 +355,9 @@ return layoutParams.gravity;			}
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(NestedScrollViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(NestedScrollViewImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -493,6 +495,7 @@ return layoutParams.gravity;			}
         	ViewImpl.stateNo(NestedScrollViewImpl.this);
         }
      
+	
 	}
 	@Override
 	public Class getViewClass() {
