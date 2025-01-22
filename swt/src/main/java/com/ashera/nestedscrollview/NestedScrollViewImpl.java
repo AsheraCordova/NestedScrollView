@@ -76,6 +76,7 @@ public class NestedScrollViewImpl extends BaseHasWidgets {
 		
 		
 		ViewGroupImpl.registerCommandConveter(this);
+
 	}
 
 	@Override
@@ -463,7 +464,7 @@ return layoutParams.gravity;			}
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-				ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
+				ViewGroupImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		Object nativeWidget = asNativeWidget();
 		switch (key.getAttributeName()) {
 			case "foregroundGravity": {
@@ -720,195 +721,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(NestedScrollView 
 		return getStyle("swtStyle", initStyle, params, fragment);
 	}
 
-	
-private NestedScrollViewCommandBuilder builder;
-private NestedScrollViewBean bean;
-public Object getPlugin(String plugin) {
-	return WidgetFactory.getAttributable(plugin).newInstance(this);
-}
-public NestedScrollViewBean getBean() {
-	if (bean == null) {
-		bean = new NestedScrollViewBean();
-	}
-	return bean;
-}
-public NestedScrollViewCommandBuilder getBuilder() {
-	if (builder == null) {
-		builder = new NestedScrollViewCommandBuilder();
-	}
-	return builder;
-}
-
-
-public  class NestedScrollViewCommandBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandBuilder <NestedScrollViewCommandBuilder> {
-    public NestedScrollViewCommandBuilder() {
-	}
-	
-	public NestedScrollViewCommandBuilder execute(boolean setter) {
-		if (setter) {
-			executeCommand(command, null, IWidget.COMMAND_EXEC_SETTER_METHOD);
-			getFragment().remeasure();
-		}
-		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
-return this;	}
-
-public NestedScrollViewCommandBuilder setForegroundGravity(String value) {
-	Map<String, Object> attrs = initCommand("foregroundGravity");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public NestedScrollViewCommandBuilder tryGetMeasureAllChildren() {
-	Map<String, Object> attrs = initCommand("measureAllChildren");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object isMeasureAllChildren() {
-	Map<String, Object> attrs = initCommand("measureAllChildren");
-	return attrs.get("commandReturnValue");
-}
-public NestedScrollViewCommandBuilder setMeasureAllChildren(boolean value) {
-	Map<String, Object> attrs = initCommand("measureAllChildren");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public NestedScrollViewCommandBuilder setNestedScrollingEnabled(boolean value) {
-	Map<String, Object> attrs = initCommand("nestedScrollingEnabled");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public NestedScrollViewCommandBuilder setOnScrollChange(String value) {
-	Map<String, Object> attrs = initCommand("onScrollChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public NestedScrollViewCommandBuilder setFillViewport(boolean value) {
-	Map<String, Object> attrs = initCommand("fillViewport");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public NestedScrollViewCommandBuilder setSmoothScrollingEnabled(boolean value) {
-	Map<String, Object> attrs = initCommand("smoothScrollingEnabled");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-}
-public class NestedScrollViewBean extends com.ashera.layout.ViewGroupImpl.ViewGroupBean{
-		public NestedScrollViewBean() {
-			super(NestedScrollViewImpl.this);
-		}
-public void setForegroundGravity(String value) {
-	getBuilder().reset().setForegroundGravity(value).execute(true);
-}
-
-public Object isMeasureAllChildren() {
-	return getBuilder().reset().tryGetMeasureAllChildren().execute(false).isMeasureAllChildren(); 
-}
-public void setMeasureAllChildren(boolean value) {
-	getBuilder().reset().setMeasureAllChildren(value).execute(true);
-}
-
-public void setNestedScrollingEnabled(boolean value) {
-	getBuilder().reset().setNestedScrollingEnabled(value).execute(true);
-}
-
-public void setOnScrollChange(String value) {
-	getBuilder().reset().setOnScrollChange(value).execute(true);
-}
-
-public void setFillViewport(boolean value) {
-	getBuilder().reset().setFillViewport(value).execute(true);
-}
-
-public void setSmoothScrollingEnabled(boolean value) {
-	getBuilder().reset().setSmoothScrollingEnabled(value).execute(true);
-}
-
-}
-
-
-private NestedScrollViewCommandParamsBuilder paramsBuilder;
-private NestedScrollViewParamsBean paramsBean;
-
-public NestedScrollViewParamsBean getParamsBean() {
-	if (paramsBean == null) {
-		paramsBean = new NestedScrollViewParamsBean();
-	}
-	return paramsBean;
-}
-public NestedScrollViewCommandParamsBuilder getParamsBuilder() {
-	if (paramsBuilder == null) {
-		paramsBuilder = new NestedScrollViewCommandParamsBuilder();
-	}
-	return paramsBuilder;
-}
-
-
-
-public class NestedScrollViewParamsBean extends com.ashera.layout.ViewGroupImpl.ViewGroupParamsBean{
-public Object getLayoutGravity(IWidget w) {
-	java.util.Map<String, Object> layoutParams = new java.util.HashMap<String, Object>();
-	java.util.Map<String, Object> command = getParamsBuilder().reset().tryGetLayoutGravity().getCommand();
-	
-	layoutParams.put("layoutParams", command);
-	w.executeCommand(layoutParams, null, COMMAND_EXEC_GETTER_METHOD); 
-	return getParamsBuilder().getLayoutGravity();
-}
-public void setLayoutGravity(IWidget w, String value) {
-	java.util.Map<String, Object> layoutParams = new java.util.HashMap<String, Object>();
-	layoutParams.put("layoutParams", getParamsBuilder().reset().setLayoutGravity(value).getCommand());
-	w.executeCommand(layoutParams, null, COMMAND_EXEC_SETTER_METHOD);
-	w.getFragment().remeasure();
-}
-
-}
-
-
-
-
-
-public class NestedScrollViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandParamsBuilder<NestedScrollViewCommandParamsBuilder>{
-public NestedScrollViewCommandParamsBuilder tryGetLayoutGravity() {
-	Map<String, Object> attrs = initCommand("layout_gravity");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getLayoutGravity() {
-	Map<String, Object> attrs = initCommand("layout_gravity");
-	return attrs.get("commandReturnValue");
-}
-public NestedScrollViewCommandParamsBuilder setLayoutGravity(String value) {
-	Map<String, Object> attrs = initCommand("layout_gravity");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-}
-
-	//end - body
+		//end - body
 	//start - scrollview
 	private int oldScrollY = 0;
 	private int nestedScrollStopDelay = 700;

@@ -11,7 +11,6 @@
 #include "Handler.h"
 #include "HasWidgets.h"
 #include "IActivity.h"
-#include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
 #include "IListener.h"
@@ -56,7 +55,6 @@
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASNestedScrollViewImpl () {
  @public
@@ -69,10 +67,6 @@
   IOSIntArray *mScrollOffset_;
   IOSIntArray *mScrollConsumed_;
   jint thumbWidth_;
-  ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *builder_;
-  ASNestedScrollViewImpl_NestedScrollViewBean *bean_;
-  ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *paramsBuilder_;
-  ASNestedScrollViewImpl_NestedScrollViewParamsBean *paramsBean_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -112,10 +106,6 @@ J2OBJC_FIELD_SETTER(ASNestedScrollViewImpl, nestedScrollView_, ADXNestedScrollVi
 J2OBJC_FIELD_SETTER(ASNestedScrollViewImpl, nestedScrollHandler_, ADHandler *)
 J2OBJC_FIELD_SETTER(ASNestedScrollViewImpl, mScrollOffset_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(ASNestedScrollViewImpl, mScrollConsumed_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(ASNestedScrollViewImpl, builder_, ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASNestedScrollViewImpl, bean_, ASNestedScrollViewImpl_NestedScrollViewBean *)
-J2OBJC_FIELD_SETTER(ASNestedScrollViewImpl, paramsBuilder_, ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *)
-J2OBJC_FIELD_SETTER(ASNestedScrollViewImpl, paramsBean_, ASNestedScrollViewImpl_NestedScrollViewParamsBean *)
 
 __attribute__((unused)) static void ASNestedScrollViewImpl_setWidgetOnNativeClass(ASNestedScrollViewImpl *self);
 
@@ -210,27 +200,6 @@ __attribute__((unused)) static ASNestedScrollViewImpl_OnScrollChangeListener *ne
 __attribute__((unused)) static ASNestedScrollViewImpl_OnScrollChangeListener *create_ASNestedScrollViewImpl_OnScrollChangeListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASNestedScrollViewImpl_OnScrollChangeListener)
-
-@interface ASNestedScrollViewImpl_NestedScrollViewCommandBuilder () {
- @public
-  ASNestedScrollViewImpl *this$0_;
-}
-
-@end
-
-@interface ASNestedScrollViewImpl_NestedScrollViewBean () {
- @public
-  ASNestedScrollViewImpl *this$0_;
-}
-
-@end
-
-@interface ASNestedScrollViewImpl_NestedScrollViewParamsBean () {
- @public
-  ASNestedScrollViewImpl *this$0_;
-}
-
-@end
 
 @interface ASNestedScrollViewImpl_MyUIScrollViewDelegate () {
  @public
@@ -554,38 +523,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASNestedScrollViewImpl_NestedScrollViewBean_initWithASNestedScrollViewImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASNestedScrollViewImpl_NestedScrollViewCommandBuilder_initWithASNestedScrollViewImpl_(self);
-  }
-  return builder_;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewParamsBean *)getParamsBean {
-  if (paramsBean_ == nil) {
-    paramsBean_ = new_ASNestedScrollViewImpl_NestedScrollViewParamsBean_initWithASNestedScrollViewImpl_(self);
-  }
-  return paramsBean_;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *)getParamsBuilder {
-  if (paramsBuilder_ == nil) {
-    paramsBuilder_ = new_ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder_initWithASNestedScrollViewImpl_(self);
-  }
-  return paramsBuilder_;
-}
-
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params {
   ASNestedScrollViewImpl_nativeCreateWithJavaUtilMap_(self, params);
 }
@@ -648,16 +585,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 29, 27, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 30, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 31, 32, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 33, 1, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 35, -1, 36, -1, -1 },
+    { NULL, "V", 0x2, 33, 34, -1, 35, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 37, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 38, 39, -1, -1, -1, -1 },
-    { NULL, "Z", 0x102, 40, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 36, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 37, 38, -1, -1, -1, -1 },
+    { NULL, "Z", 0x102, 39, 8, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -691,22 +623,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[25].selector = @selector(postOnMeasureWithInt:withInt:);
   methods[26].selector = @selector(setIdWithNSString:);
   methods[27].selector = @selector(setVisibleWithBoolean:);
-  methods[28].selector = @selector(getPluginWithNSString:);
-  methods[29].selector = @selector(getBean);
-  methods[30].selector = @selector(getBuilder);
-  methods[31].selector = @selector(getParamsBean);
-  methods[32].selector = @selector(getParamsBuilder);
-  methods[33].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[34].selector = @selector(nativescrollViewCreate);
-  methods[35].selector = @selector(setEnabledWithBoolean:);
-  methods[36].selector = @selector(setScrollEnabledWithId:withId:);
-  methods[37].selector = @selector(hasReachedEndWithInt:);
-  methods[38].selector = @selector(asNativeWidget);
+  methods[28].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[29].selector = @selector(nativescrollViewCreate);
+  methods[30].selector = @selector(setEnabledWithBoolean:);
+  methods[31].selector = @selector(setScrollEnabledWithId:withId:);
+  methods[32].selector = @selector(hasReachedEndWithInt:);
+  methods[33].selector = @selector(asNativeWidget);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 41, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 42, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 40, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 41, -1, -1 },
     { "nestedScrollView_", "LADXNestedScrollView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "oldScrollY_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "nestedScrollStopDelay_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -715,13 +642,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "mScrollOffset_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
     { "mScrollConsumed_", "[I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
     { "thumbWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASNestedScrollViewImpl_NestedScrollViewBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBuilder_", "LASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBean_", "LASNestedScrollViewImpl_NestedScrollViewParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setOnScrollChangeListener", "LNSObject;", "handleScroll", "II", "postSetAttribute", "postOnMeasure", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setEnabled", "setScrollEnabled", "LNSObject;LNSObject;", "hasReachedEnd", &ASNestedScrollViewImpl_LOCAL_NAME, &ASNestedScrollViewImpl_GROUP_NAME, "LASNestedScrollViewImpl_NestedScrollViewExt;LASNestedScrollViewImpl_OnScrollChangeListener;LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;LASNestedScrollViewImpl_NestedScrollViewBean;LASNestedScrollViewImpl_NestedScrollViewParamsBean;LASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder;LASNestedScrollViewImpl_MyUIScrollViewDelegate;" };
-  static const J2ObjcClassInfo _ASNestedScrollViewImpl = { "NestedScrollViewImpl", "com.ashera.nestedscrollview", ptrTable, methods, fields, 7, 0x1, 39, 15, -1, 43, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setOnScrollChangeListener", "LNSObject;", "handleScroll", "II", "postSetAttribute", "postOnMeasure", "setId", "setVisible", "Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setEnabled", "setScrollEnabled", "LNSObject;LNSObject;", "hasReachedEnd", &ASNestedScrollViewImpl_LOCAL_NAME, &ASNestedScrollViewImpl_GROUP_NAME, "LASNestedScrollViewImpl_NestedScrollViewExt;LASNestedScrollViewImpl_OnScrollChangeListener;LASNestedScrollViewImpl_MyUIScrollViewDelegate;" };
+  static const J2ObjcClassInfo _ASNestedScrollViewImpl = { "NestedScrollViewImpl", "com.ashera.nestedscrollview", ptrTable, methods, fields, 7, 0x1, 34, 11, -1, 42, -1, -1, -1 };
   return &_ASNestedScrollViewImpl;
 }
 
@@ -1381,350 +1304,6 @@ ASNestedScrollViewImpl_OnScrollChangeListener *create_ASNestedScrollViewImpl_OnS
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl_OnScrollChangeListener)
-
-@implementation ASNestedScrollViewImpl_NestedScrollViewCommandBuilder
-
-- (instancetype)initWithASNestedScrollViewImpl:(ASNestedScrollViewImpl *)outer$ {
-  ASNestedScrollViewImpl_NestedScrollViewCommandBuilder_initWithASNestedScrollViewImpl_(self, outer$);
-  return self;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)setForegroundGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundGravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)tryGetMeasureAllChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"measureAllChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isMeasureAllChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"measureAllChildren"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)setMeasureAllChildrenWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"measureAllChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)setNestedScrollingEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"nestedScrollingEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)setOnScrollChangeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onScrollChange"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)setFillViewportWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"fillViewport"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *)setSmoothScrollingEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"smoothScrollingEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", 0x1, 5, 2, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", 0x1, 8, 2, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandBuilder;", 0x1, 9, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASNestedScrollViewImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setForegroundGravityWithNSString:);
-  methods[3].selector = @selector(tryGetMeasureAllChildren);
-  methods[4].selector = @selector(isMeasureAllChildren);
-  methods[5].selector = @selector(setMeasureAllChildrenWithBoolean:);
-  methods[6].selector = @selector(setNestedScrollingEnabledWithBoolean:);
-  methods[7].selector = @selector(setOnScrollChangeWithNSString:);
-  methods[8].selector = @selector(setFillViewportWithBoolean:);
-  methods[9].selector = @selector(setSmoothScrollingEnabledWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASNestedScrollViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASNestedScrollViewImpl;", "execute", "Z", "setForegroundGravity", "LNSString;", "setMeasureAllChildren", "setNestedScrollingEnabled", "setOnScrollChange", "setFillViewport", "setSmoothScrollingEnabled", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilder<Lcom/ashera/nestedscrollview/NestedScrollViewImpl$NestedScrollViewCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASNestedScrollViewImpl_NestedScrollViewCommandBuilder = { "NestedScrollViewCommandBuilder", "com.ashera.nestedscrollview", ptrTable, methods, fields, 7, 0x1, 10, 1, 0, -1, -1, 10, -1 };
-  return &_ASNestedScrollViewImpl_NestedScrollViewCommandBuilder;
-}
-
-@end
-
-void ASNestedScrollViewImpl_NestedScrollViewCommandBuilder_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *self, ASNestedScrollViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-}
-
-ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *new_ASNestedScrollViewImpl_NestedScrollViewCommandBuilder_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASNestedScrollViewImpl_NestedScrollViewCommandBuilder, initWithASNestedScrollViewImpl_, outer$)
-}
-
-ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *create_ASNestedScrollViewImpl_NestedScrollViewCommandBuilder_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASNestedScrollViewImpl_NestedScrollViewCommandBuilder, initWithASNestedScrollViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl_NestedScrollViewCommandBuilder)
-
-@implementation ASNestedScrollViewImpl_NestedScrollViewBean
-
-- (instancetype)initWithASNestedScrollViewImpl:(ASNestedScrollViewImpl *)outer$ {
-  ASNestedScrollViewImpl_NestedScrollViewBean_initWithASNestedScrollViewImpl_(self, outer$);
-  return self;
-}
-
-- (void)setForegroundGravityWithNSString:(NSString *)value {
-  (void) [((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setForegroundGravityWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isMeasureAllChildren {
-  return [((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMeasureAllChildren])) executeWithBoolean:false])) isMeasureAllChildren];
-}
-
-- (void)setMeasureAllChildrenWithBoolean:(jboolean)value {
-  (void) [((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMeasureAllChildrenWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setNestedScrollingEnabledWithBoolean:(jboolean)value {
-  (void) [((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setNestedScrollingEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setOnScrollChangeWithNSString:(NSString *)value {
-  (void) [((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnScrollChangeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setFillViewportWithBoolean:(jboolean)value {
-  (void) [((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFillViewportWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setSmoothScrollingEnabledWithBoolean:(jboolean)value {
-  (void) [((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setSmoothScrollingEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASNestedScrollViewImpl:);
-  methods[1].selector = @selector(setForegroundGravityWithNSString:);
-  methods[2].selector = @selector(isMeasureAllChildren);
-  methods[3].selector = @selector(setMeasureAllChildrenWithBoolean:);
-  methods[4].selector = @selector(setNestedScrollingEnabledWithBoolean:);
-  methods[5].selector = @selector(setOnScrollChangeWithNSString:);
-  methods[6].selector = @selector(setFillViewportWithBoolean:);
-  methods[7].selector = @selector(setSmoothScrollingEnabledWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASNestedScrollViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASNestedScrollViewImpl;", "setForegroundGravity", "LNSString;", "setMeasureAllChildren", "Z", "setNestedScrollingEnabled", "setOnScrollChange", "setFillViewport", "setSmoothScrollingEnabled" };
-  static const J2ObjcClassInfo _ASNestedScrollViewImpl_NestedScrollViewBean = { "NestedScrollViewBean", "com.ashera.nestedscrollview", ptrTable, methods, fields, 7, 0x1, 8, 1, 0, -1, -1, -1, -1 };
-  return &_ASNestedScrollViewImpl_NestedScrollViewBean;
-}
-
-@end
-
-void ASNestedScrollViewImpl_NestedScrollViewBean_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl_NestedScrollViewBean *self, ASNestedScrollViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(self, outer$);
-}
-
-ASNestedScrollViewImpl_NestedScrollViewBean *new_ASNestedScrollViewImpl_NestedScrollViewBean_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASNestedScrollViewImpl_NestedScrollViewBean, initWithASNestedScrollViewImpl_, outer$)
-}
-
-ASNestedScrollViewImpl_NestedScrollViewBean *create_ASNestedScrollViewImpl_NestedScrollViewBean_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASNestedScrollViewImpl_NestedScrollViewBean, initWithASNestedScrollViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl_NestedScrollViewBean)
-
-@implementation ASNestedScrollViewImpl_NestedScrollViewParamsBean
-
-- (instancetype)initWithASNestedScrollViewImpl:(ASNestedScrollViewImpl *)outer$ {
-  ASNestedScrollViewImpl_NestedScrollViewParamsBean_initWithASNestedScrollViewImpl_(self, outer$);
-  return self;
-}
-
-- (id)getLayoutGravityWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) tryGetLayoutGravity])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) getLayoutGravity];
-}
-
-- (void)setLayoutGravityWithASIWidget:(id<ASIWidget>)w
-                         withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *) nil_chk([((ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) setLayoutGravityWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASNestedScrollViewImpl:);
-  methods[1].selector = @selector(getLayoutGravityWithASIWidget:);
-  methods[2].selector = @selector(setLayoutGravityWithASIWidget:withNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASNestedScrollViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASNestedScrollViewImpl;", "getLayoutGravity", "LASIWidget;", "setLayoutGravity", "LASIWidget;LNSString;" };
-  static const J2ObjcClassInfo _ASNestedScrollViewImpl_NestedScrollViewParamsBean = { "NestedScrollViewParamsBean", "com.ashera.nestedscrollview", ptrTable, methods, fields, 7, 0x1, 3, 1, 0, -1, -1, -1, -1 };
-  return &_ASNestedScrollViewImpl_NestedScrollViewParamsBean;
-}
-
-@end
-
-void ASNestedScrollViewImpl_NestedScrollViewParamsBean_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl_NestedScrollViewParamsBean *self, ASNestedScrollViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupParamsBean_init(self);
-}
-
-ASNestedScrollViewImpl_NestedScrollViewParamsBean *new_ASNestedScrollViewImpl_NestedScrollViewParamsBean_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASNestedScrollViewImpl_NestedScrollViewParamsBean, initWithASNestedScrollViewImpl_, outer$)
-}
-
-ASNestedScrollViewImpl_NestedScrollViewParamsBean *create_ASNestedScrollViewImpl_NestedScrollViewParamsBean_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASNestedScrollViewImpl_NestedScrollViewParamsBean, initWithASNestedScrollViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl_NestedScrollViewParamsBean)
-
-@implementation ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder
-
-- (instancetype)initWithASNestedScrollViewImpl:(ASNestedScrollViewImpl *)outer$ {
-  ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder_initWithASNestedScrollViewImpl_(self, outer$);
-  return self;
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *)tryGetLayoutGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *)setLayoutGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASNestedScrollViewImpl:);
-  methods[1].selector = @selector(tryGetLayoutGravity);
-  methods[2].selector = @selector(getLayoutGravity);
-  methods[3].selector = @selector(setLayoutGravityWithNSString:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASNestedScrollViewImpl;", "setLayoutGravity", "LNSString;", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilder<Lcom/ashera/nestedscrollview/NestedScrollViewImpl$NestedScrollViewCommandParamsBuilder;>;" };
-  static const J2ObjcClassInfo _ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder = { "NestedScrollViewCommandParamsBuilder", "com.ashera.nestedscrollview", ptrTable, methods, NULL, 7, 0x1, 4, 0, 0, -1, -1, 3, -1 };
-  return &_ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder;
-}
-
-@end
-
-void ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *self, ASNestedScrollViewImpl *outer$) {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-}
-
-ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *new_ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder, initWithASNestedScrollViewImpl_, outer$)
-}
-
-ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder *create_ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder, initWithASNestedScrollViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl_NestedScrollViewCommandParamsBuilder)
 
 @implementation ASNestedScrollViewImpl_MyUIScrollViewDelegate
 
