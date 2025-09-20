@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-ios-widgets\IOSNestedScrollViewPlugin\src\main\java\com\ashera\nestedscrollview\NestedScrollViewPlugin.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "NestedScrollViewImpl.h"
 #include "NestedScrollViewPlugin.h"
 #include "WidgetFactory.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASNestedScrollViewPlugin
@@ -57,3 +68,5 @@ void ASNestedScrollViewPlugin_initPlugin() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewPlugin)
+
+J2OBJC_NAME_MAPPING(ASNestedScrollViewPlugin, "com.ashera.nestedscrollview", "AS")

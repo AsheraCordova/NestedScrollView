@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSNestedScrollViewPlugin\src\main\java\com\ashera\nestedscrollview\NestedScrollViewPlugin.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NestedScrollViewPlugin")
@@ -39,6 +40,7 @@ FOUNDATION_EXPORT void ASNestedScrollViewPlugin_initPlugin(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASNestedScrollViewPlugin)
 
 @compatibility_alias ComAsheraNestedscrollviewNestedScrollViewPlugin ASNestedScrollViewPlugin;
+
 
 #endif
 

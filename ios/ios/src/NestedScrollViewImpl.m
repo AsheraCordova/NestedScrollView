@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSNestedScrollViewPlugin\src\main\java\com\ashera\nestedscrollview\NestedScrollViewImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseHasWidgets.h"
 #include "EventCommand.h"
 #include "EventCommandFactory.h"
@@ -37,6 +42,7 @@
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/System.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -50,8 +56,12 @@
 
 #include "ASUIScrollView.h"
 
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -60,13 +70,13 @@
  @public
   id uiView_;
   ADXNestedScrollView *nestedScrollView_;
-  jint oldScrollY_;
-  jint nestedScrollStopDelay_;
-  jlong lastScrollEvent_;
+  int32_t oldScrollY_;
+  int32_t nestedScrollStopDelay_;
+  int64_t lastScrollEvent_;
   ADHandler *nestedScrollHandler_;
   IOSIntArray *mScrollOffset_;
   IOSIntArray *mScrollConsumed_;
-  jint thumbWidth_;
+  int32_t thumbWidth_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -79,25 +89,25 @@
 
 - (void)setOnScrollChangeListenerWithId:(id)objValue;
 
-- (void)handleScrollWithInt:(jint)selection
-                    withInt:(jint)eventDetail;
+- (void)handleScrollWithInt:(int32_t)selection
+                    withInt:(int32_t)eventDetail;
 
 - (void)postSetAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
                                  withNSString:(NSString *)strValue
                                        withId:(id)objValue
                     withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (void)postOnMeasureWithInt:(jint)widthMeasureSpec
-                     withInt:(jint)heightMeasureSpec;
+- (void)postOnMeasureWithInt:(int32_t)widthMeasureSpec
+                     withInt:(int32_t)heightMeasureSpec;
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params;
 
-- (void)setEnabledWithBoolean:(jboolean)objValue;
+- (void)setEnabledWithBoolean:(bool)objValue;
 
 - (void)setScrollEnabledWithId:(id)nativeWidget
                         withId:(id)value;
 
-- (jboolean)hasReachedEndWithInt:(jint)selection;
+- (bool)hasReachedEndWithInt:(int32_t)selection;
 
 @end
 
@@ -117,28 +127,28 @@ __attribute__((unused)) static ADFrameLayout_LayoutParams *ASNestedScrollViewImp
 
 __attribute__((unused)) static void ASNestedScrollViewImpl_setOnScrollChangeListenerWithId_(ASNestedScrollViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASNestedScrollViewImpl_handleScrollWithInt_withInt_(ASNestedScrollViewImpl *self, jint selection, jint eventDetail);
+__attribute__((unused)) static void ASNestedScrollViewImpl_handleScrollWithInt_withInt_(ASNestedScrollViewImpl *self, int32_t selection, int32_t eventDetail);
 
 __attribute__((unused)) static void ASNestedScrollViewImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(ASNestedScrollViewImpl *self, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
 
-__attribute__((unused)) static void ASNestedScrollViewImpl_postOnMeasureWithInt_withInt_(ASNestedScrollViewImpl *self, jint widthMeasureSpec, jint heightMeasureSpec);
+__attribute__((unused)) static void ASNestedScrollViewImpl_postOnMeasureWithInt_withInt_(ASNestedScrollViewImpl *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec);
 
 __attribute__((unused)) static void ASNestedScrollViewImpl_nativeCreateWithJavaUtilMap_(ASNestedScrollViewImpl *self, id<JavaUtilMap> params);
 
-__attribute__((unused)) static void ASNestedScrollViewImpl_setEnabledWithBoolean_(ASNestedScrollViewImpl *self, jboolean objValue);
+__attribute__((unused)) static void ASNestedScrollViewImpl_setEnabledWithBoolean_(ASNestedScrollViewImpl *self, bool objValue);
 
 __attribute__((unused)) static void ASNestedScrollViewImpl_setScrollEnabledWithId_withId_(ASNestedScrollViewImpl *self, id nativeWidget, id value);
 
-__attribute__((unused)) static jboolean ASNestedScrollViewImpl_hasReachedEndWithInt_(ASNestedScrollViewImpl *self, jint selection);
+__attribute__((unused)) static bool ASNestedScrollViewImpl_hasReachedEndWithInt_(ASNestedScrollViewImpl *self, int32_t selection);
 
 @interface ASNestedScrollViewImpl_NestedScrollViewExt () {
  @public
-  __unsafe_unretained ASNestedScrollViewImpl *this$0_;
+  WEAK_ ASNestedScrollViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -167,16 +177,16 @@ J2OBJC_FIELD_SETTER(ASNestedScrollViewImpl_NestedScrollViewExt, templates_, id<J
                      withNSString:(NSString *)action;
 
 - (void)onScrollChangeWithADXNestedScrollView:(ADXNestedScrollView *)v
-                                      withInt:(jint)scrollX
-                                      withInt:(jint)scrollY
-                                      withInt:(jint)oldScrollX
-                                      withInt:(jint)oldScrollY;
+                                      withInt:(int32_t)scrollX
+                                      withInt:(int32_t)scrollY
+                                      withInt:(int32_t)oldScrollX
+                                      withInt:(int32_t)oldScrollY;
 
 - (id<JavaUtilMap>)getOnScrollChangeEventObjWithADXNestedScrollView:(ADXNestedScrollView *)v
-                                                            withInt:(jint)scrollX
-                                                            withInt:(jint)scrollY
-                                                            withInt:(jint)oldScrollX
-                                                            withInt:(jint)oldScrollY;
+                                                            withInt:(int32_t)scrollX
+                                                            withInt:(int32_t)scrollY
+                                                            withInt:(int32_t)oldScrollX
+                                                            withInt:(int32_t)oldScrollY;
 
 @end
 
@@ -201,9 +211,10 @@ __attribute__((unused)) static ASNestedScrollViewImpl_OnScrollChangeListener *cr
 
 J2OBJC_TYPE_LITERAL_HEADER(ASNestedScrollViewImpl_OnScrollChangeListener)
 
+
 @interface ASNestedScrollViewImpl_MyUIScrollViewDelegate () {
  @public
-  __unsafe_unretained ASNestedScrollViewImpl *this$0_;
+  WEAK_ ASNestedScrollViewImpl *this$0_;
   id<ADView_OnScrollChangeListener> listener_;
 }
 
@@ -228,6 +239,7 @@ __attribute__((unused)) static ASNestedScrollViewImpl_$Lambda$1 *new_ASNestedScr
 
 __attribute__((unused)) static ASNestedScrollViewImpl_$Lambda$1 *create_ASNestedScrollViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
 
+
 @interface ASNestedScrollViewImpl_$Lambda$2 : NSObject < JavaLangRunnable > {
  @public
   ASNestedScrollViewImpl *this$0_;
@@ -245,6 +257,7 @@ __attribute__((unused)) static ASNestedScrollViewImpl_$Lambda$2 *new_ASNestedScr
 
 __attribute__((unused)) static ASNestedScrollViewImpl_$Lambda$2 *create_ASNestedScrollViewImpl_$Lambda$2_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$);
 
+
 @interface ASNestedScrollViewImpl_$Lambda$3 : NSObject < JavaLangRunnable > {
  @public
   ASNestedScrollViewImpl *this$0_;
@@ -261,6 +274,7 @@ __attribute__((unused)) static void ASNestedScrollViewImpl_$Lambda$3_initWithASN
 __attribute__((unused)) static ASNestedScrollViewImpl_$Lambda$3 *new_ASNestedScrollViewImpl_$Lambda$3_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASNestedScrollViewImpl_$Lambda$3 *create_ASNestedScrollViewImpl_$Lambda$3_initWithASNestedScrollViewImpl_(ASNestedScrollViewImpl *outer$);
+
 
 NSString *ASNestedScrollViewImpl_LOCAL_NAME = @"androidx.core.widget.NestedScrollView";
 NSString *ASNestedScrollViewImpl_GROUP_NAME = @"androidx.core.widget.NestedScrollView";
@@ -319,16 +333,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nestedScrollView_;
 }
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
-  jboolean remove = [super removeWithASIWidget:w];
+- (bool)removeWithASIWidget:(id<ASIWidget>)w {
+  bool remove = [super removeWithASIWidget:w];
   [((ADXNestedScrollView *) nil_chk(nestedScrollView_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
   ASNestedScrollViewImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
-- (jboolean)removeWithInt:(jint)index {
+- (bool)removeWithInt:(int32_t)index {
   id<ASIWidget> widget = [((id<JavaUtilList>) nil_chk(widgets_)) getWithInt:index];
-  jboolean remove = [super removeWithInt:index];
+  bool remove = [super removeWithInt:index];
   if (index + 1 <= [((ADXNestedScrollView *) nil_chk(nestedScrollView_)) getChildCount]) {
     [((ADXNestedScrollView *) nil_chk(nestedScrollView_)) removeViewAtWithInt:index];
     ASNestedScrollViewImpl_nativeRemoveViewWithASIWidget_(self, widget);
@@ -341,7 +355,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index {
+                 withInt:(int32_t)index {
   if (index != -2) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
     ASNestedScrollViewImpl_createLayoutParamsWithADView_(self, view);
@@ -475,7 +489,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -495,8 +509,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASNestedScrollViewImpl_setOnScrollChangeListenerWithId_(self, objValue);
 }
 
-- (void)handleScrollWithInt:(jint)selection
-                    withInt:(jint)eventDetail {
+- (void)handleScrollWithInt:(int32_t)selection
+                    withInt:(int32_t)eventDetail {
   ASNestedScrollViewImpl_handleScrollWithInt_withInt_(self, selection, eventDetail);
 }
 
@@ -507,8 +521,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASNestedScrollViewImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
 }
 
-- (void)postOnMeasureWithInt:(jint)widthMeasureSpec
-                     withInt:(jint)heightMeasureSpec {
+- (void)postOnMeasureWithInt:(int32_t)widthMeasureSpec
+                     withInt:(int32_t)heightMeasureSpec {
   ASNestedScrollViewImpl_postOnMeasureWithInt_withInt_(self, widthMeasureSpec, heightMeasureSpec);
 }
 
@@ -519,7 +533,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -538,7 +552,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView;
 }
 
-- (void)setEnabledWithBoolean:(jboolean)objValue {
+- (void)setEnabledWithBoolean:(bool)objValue {
   ASNestedScrollViewImpl_setEnabledWithBoolean_(self, objValue);
 }
 
@@ -547,7 +561,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASNestedScrollViewImpl_setScrollEnabledWithId_withId_(self, nativeWidget, value);
 }
 
-- (jboolean)hasReachedEndWithInt:(jint)selection {
+- (bool)hasReachedEndWithInt:(int32_t)selection {
   return ASNestedScrollViewImpl_hasReachedEndWithInt_(self, selection);
 }
 
@@ -744,16 +758,16 @@ void ASNestedScrollViewImpl_setOnScrollChangeListenerWithId_(ASNestedScrollViewI
   }
 }
 
-void ASNestedScrollViewImpl_handleScrollWithInt_withInt_(ASNestedScrollViewImpl *self, jint selection, jint eventDetail) {
+void ASNestedScrollViewImpl_handleScrollWithInt_withInt_(ASNestedScrollViewImpl *self, int32_t selection, int32_t eventDetail) {
   [((ADHandler *) nil_chk(self->nestedScrollHandler_)) removeCallbacksAndMessagesWithId:nil];
-  jlong currentTime = JavaLangSystem_currentTimeMillis();
+  int64_t currentTime = JavaLangSystem_currentTimeMillis();
   if (currentTime - self->lastScrollEvent_ >= self->nestedScrollStopDelay_) {
     [((ADXNestedScrollView *) nil_chk(self->nestedScrollView_)) startNestedScrollWithInt:ADXViewCompat_SCROLL_AXIS_VERTICAL withInt:ADXViewCompat_TYPE_TOUCH];
   }
   [((ADHandler *) nil_chk(self->nestedScrollHandler_)) postDelayedWithJavaLangRunnable:new_ASNestedScrollViewImpl_$Lambda$2_initWithASNestedScrollViewImpl_(self) withLong:self->nestedScrollStopDelay_];
   self->lastScrollEvent_ = JavaLangSystem_currentTimeMillis();
-  jint scrolledDeltaY = selection - self->oldScrollY_;
-  jint unconsumedY = 0;
+  int32_t scrolledDeltaY = selection - self->oldScrollY_;
+  int32_t unconsumedY = 0;
   if ([((ADXNestedScrollView *) nil_chk(self->nestedScrollView_)) dispatchNestedPreScrollWithInt:0 withInt:scrolledDeltaY withIntArray:self->mScrollConsumed_ withIntArray:self->mScrollOffset_ withInt:ADXViewCompat_TYPE_TOUCH]) {
   }
   *IOSIntArray_GetRef(nil_chk(self->mScrollConsumed_), 1) = 0;
@@ -780,7 +794,7 @@ void ASNestedScrollViewImpl_postSetAttributeWithASWidgetAttribute_withNSString_w
   }
 }
 
-void ASNestedScrollViewImpl_postOnMeasureWithInt_withInt_(ASNestedScrollViewImpl *self, jint widthMeasureSpec, jint heightMeasureSpec) {
+void ASNestedScrollViewImpl_postOnMeasureWithInt_withInt_(ASNestedScrollViewImpl *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec) {
   [((ADXNestedScrollView *) nil_chk(self->nestedScrollView_)) adjustPaddingIfScrollBarPresentWithInt:widthMeasureSpec withInt:heightMeasureSpec withInt:self->thumbWidth_];
 }
 
@@ -790,7 +804,7 @@ void ASNestedScrollViewImpl_nativeCreateWithJavaUtilMap_(ASNestedScrollViewImpl 
   [myUIScrollViewDelegate nativeScrollChangeListenerWithId:[self asNativeWidget]];
 }
 
-void ASNestedScrollViewImpl_setEnabledWithBoolean_(ASNestedScrollViewImpl *self, jboolean objValue) {
+void ASNestedScrollViewImpl_setEnabledWithBoolean_(ASNestedScrollViewImpl *self, bool objValue) {
   ASNestedScrollViewImpl_setScrollEnabledWithId_withId_(self, self->uiView_, JavaLangBoolean_valueOfWithBoolean_(objValue));
 }
 
@@ -798,12 +812,14 @@ void ASNestedScrollViewImpl_setScrollEnabledWithId_withId_(ASNestedScrollViewImp
   ((UIScrollView*) nativeWidget).scrollEnabled = [(JavaLangBoolean*) value booleanValue];
 }
 
-jboolean ASNestedScrollViewImpl_hasReachedEndWithInt_(ASNestedScrollViewImpl *self, jint selection) {
+bool ASNestedScrollViewImpl_hasReachedEndWithInt_(ASNestedScrollViewImpl *self, int32_t selection) {
   UIScrollView* scrollview = ((UIScrollView*)self->uiView_);
   return selection >= (scrollview.contentSize.height - scrollview.frame.size.height);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl)
+
+J2OBJC_NAME_MAPPING(ASNestedScrollViewImpl, "com.ashera.nestedscrollview", "AS")
 
 @implementation ASNestedScrollViewImpl_NestedScrollViewExt
 
@@ -811,19 +827,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl)
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -832,8 +848,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -850,15 +866,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl)
   ASNestedScrollViewImpl_postOnMeasureWithInt_withInt_(this$0_, widthMeasureSpec, heightMeasureSpec);
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
-    ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b, (jint) ([self computeVerticalScrollRange]));
+    ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b, (int32_t) ([self computeVerticalScrollRange]));
   }
   [this$0_ replayBufferedEvents];
   ASViewImpl_redrawDrawablesWithASIWidget_(this$0_);
@@ -881,8 +897,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -950,12 +966,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -985,7 +1001,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
@@ -1186,10 +1202,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl_NestedScrollViewExt)
 }
 
 - (void)onScrollChangeWithADXNestedScrollView:(ADXNestedScrollView *)v
-                                      withInt:(jint)scrollX
-                                      withInt:(jint)scrollY
-                                      withInt:(jint)oldScrollX
-                                      withInt:(jint)oldScrollY {
+                                      withInt:(int32_t)scrollX
+                                      withInt:(int32_t)scrollY
+                                      withInt:(int32_t)oldScrollX
+                                      withInt:(int32_t)oldScrollY {
   if (action_ == nil || [action_ isEqual:@"onScrollChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onScrollChange"];
     id<JavaUtilMap> obj = [self getOnScrollChangeEventObjWithADXNestedScrollView:v withInt:scrollX withInt:scrollY withInt:oldScrollX withInt:oldScrollY];
@@ -1211,7 +1227,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl_NestedScrollViewExt)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1222,10 +1238,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl_NestedScrollViewExt)
 }
 
 - (id<JavaUtilMap>)getOnScrollChangeEventObjWithADXNestedScrollView:(ADXNestedScrollView *)v
-                                                            withInt:(jint)scrollX
-                                                            withInt:(jint)scrollY
-                                                            withInt:(jint)oldScrollX
-                                                            withInt:(jint)oldScrollY {
+                                                            withInt:(int32_t)scrollX
+                                                            withInt:(int32_t)scrollY
+                                                            withInt:(int32_t)oldScrollX
+                                                            withInt:(int32_t)oldScrollY {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"scrollchange"];
@@ -1318,8 +1334,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNestedScrollViewImpl_OnScrollChangeListener)
   scrollview.delegate = self;
 }
 
-- (void)onscrollWithInt:(jint)scrollX
-                withInt:(jint)scrollY {
+- (void)onscrollWithInt:(int32_t)scrollX
+                withInt:(int32_t)scrollY {
   ASNestedScrollViewImpl_handleScrollWithInt_withInt_(this$0_, scrollY, 1);
 }
 
